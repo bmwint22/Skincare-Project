@@ -1,10 +1,34 @@
 const mongoose = require("mongoose");
 
-// models/user.js
 
-const applicationSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
+  productID: {
+    type: primaryKey,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    enum: ['cleanser', 'moisturizer', 'exfoliator', 'serum', 'sunscreen']
+  },
+  price: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: foreignKey,
+    reuired: true
+},
 
-  });
+});
+
   
   const userSchema = new mongoose.Schema({
     userId: {
@@ -26,8 +50,10 @@ const applicationSchema = new mongoose.Schema({
         type: String,
     },
 
-    products: [productSchema], // embedding the applicationSchema here
+    products: [productSchema], 
   });
   
+
+
 
   
