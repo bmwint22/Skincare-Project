@@ -6,9 +6,16 @@
     <title>Skincare app</title>
   </head>
   <body>
-    <h1>Skincare Regimen</h1>
-    <p>Your favorite skincare products.</p>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">Sign in</a>
+    <% if (user) { %>
+      <h1>Welcome to the Skincare app, <%= user.userID %>!</h1>
+      <p>
+        <a href="/auth/sign-out">Sign out</a>
+      </p>
+      <% } else { %>
+      <h1>Welcome to the Skincare app!</h1>
+      <p>
+        <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">sign in</a>.
+      </p>
+      <% } %>
   </body>
 </html>

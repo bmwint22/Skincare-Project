@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const productSchema = new mongoose.Schema({
   productID: {
     type: String,
@@ -25,37 +24,8 @@ const productSchema = new mongoose.Schema({
   },
   userID: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
 });
 
-  
-  const userSchema = new mongoose.Schema({
-    userID: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    role: {
-        type: String,
-    },
-
-    products: [productSchema], 
-  });
-  
-
-
-
-  
+module.exports = mongoose.model("Product", productSchema);

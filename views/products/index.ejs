@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Products</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Your Products</h1>
+    <a href="/users/<%= user._id %>/products/new">Add a Skincare Product</a>
+    
+    <ul>
+      <% products.forEach(product => { %>
+        <li>
+          <strong><%= product.name %></strong> - <%= product.category %>
+          <p><%= product.description %></p>
+          <p>Price: $<%= product.price %></p>
+        </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

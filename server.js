@@ -1,17 +1,28 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const dotenv = require("dotenv"); 
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const morgan = require('morgan');
-const session = require('express-session');
-const isSignedIn = require('./middleware/is-signed-in.js');
-const passUserToView = require('./middleware/pass-user-to-view.js');
-const authController = require('./authController');
-const productsController = require('./controllers/products.js');
+const morgan = require("morgan");
+const session = require("express-session");
+const methodOverride = require("method-override");
 
+const cors = require("cors");
+const isSignedIn = require("./middleware/is-signed-in.js");
+const passUserToView = require("./middleware/pass-user-to-view.js");
 
+const authController = require("./controllers/auth.js");
+const productsController = require("./controllers/productController.js");
+const productRoutes = require("./routes/productRoutes"); 
+
+dotenv.config(); 
+
+const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors({ origin: "http://localhost:3000" })); 
 app.use(express.urlencoded({ extended: false }));
-app.use(methodOverride('_method'));
+app.use(express.json());
+app.use(methodOverride("_method"));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -19,53 +30,30 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(passUserToView);
+app.use(morgan("dev")); 
 
-app.use(passUserToView); 
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/skincareDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log(`Connected to MongoDB: ${mongoose.connection.name}`))
+  .catch((err) => console.log("MongoDB connection error:", err));
 
-app.get('/', (req, res) => {
-  res.render('index.ejs', {
-    user: req.session.user,
-  });
-});
-
-app.use('/auth', authController);
+app.use("/auth", authController);
 app.use(isSignedIn); 
+app.use("/users/:userId/products", productsController);
+app.use("/products", productRoutes); 
 
-
-dotenv.config();
-
-mongoose.connect(process.env.MONGODB_URI);
-
-mongoose.connection.on("connected", () => {
-    console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-  });
-
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.get("/", (req, res) => {
+  if (req.session.user) {
+    res.redirect(`/users/${req.session.user._id}/products`);
+  } else {
+    res.render("index.ejs", { user: req.session.user });
+  }
 });
-
-
-app.get("/", async (req, res) => {
-    res.send("Skincare!");
-  });
-  
-  
-app.get("/", async (req, res) => {
-    res.render("index.ejs");
-  });
-  
-
-app.get('/', (req, res) => {
-  res.render('index.ejs', {
-    user: req.session.user,
-  });
-});
-
-
-app.use('/auth', authController);
-app.use(isSignedIn);
-app.use('/users/:userId/products', productsController); // New!
 
 app.listen(port, () => {
-  console.log(`The express app is ready on port ${port}!`);
+  console.log(`Server running on http://localhost:${port}`);
 });
