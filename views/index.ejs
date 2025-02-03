@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skincare app</title>
-  </head>
-  <body>
-    <% if (user) { %>
-      <h1>Welcome to the Skincare app, <%= user.userID %>!</h1>
-      <p>
-        <a href="/auth/sign-out">Sign out</a>
-      </p>
-      <% } else { %>
-      <h1>Welcome to the Skincare app!</h1>
-      <p>
-        <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">sign in</a>.
-      </p>
-      <% } %>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare</title>
+</head>
+
+<body>
+    <%- include('./partials/_navbar.ejs') %>
+        <h1>Skincare Collection</h1>
+        <p>A collection of your favorite skincare products.</p>
+        <a href="/auth/sign-up">Sign up</a>
+        <a href="/auth/sign-in">Sign in</a>
+</body>
+
 </html>

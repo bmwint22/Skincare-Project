@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Editing <%= product.description %>
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>Edit <%= product.name %><%= product.description %>
+        </h1>
+
+        <form action="/users/<%= user._id %>/products/<%= product._id %>?_method=PUT" method="POST">
+
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<% product.name %>" />
+
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="" />
+
+            <select id="category" name="category">
+                <option value="cleanser" <%=product.category==='cleanser' ? 'selected' : '' %>
+                    >
+                    Cleanser
+                </option>
+                <option value="moisturizer" <%=product.category==='moisturizer' ? 'selected' : '' %>
+                    >
+                    Moisturizer
+                </option>
+                <option value="sunscreen" <%=product.category==='sunscreen' ? 'selected' : '' %>
+                    >
+                    Sunscreen
+                </option>
+            </select>
+
+            <label for="price">Price:</label>
+            <input type="text" name="price" id="price" />
+            <button type="submit">Update Product</button>
+        </form>
+</body> 
+
+</html>

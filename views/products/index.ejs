@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Products</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Your Products</h1>
-    <a href="/users/<%= user._id %>/products/new">Add a Skincare Product</a>
-    
-    <ul>
-      <% products.forEach(product => { %>
-        <li>
-          <strong><%= product.name %></strong> - <%= product.category %>
-          <p><%= product.description %></p>
-          <p>Price: $<%= product.price %></p>
-        </li>
-      <% }); %>
-    </ul>
-  </body>
+        <h1>Your Skincare Collection</h1>
+        <a href="/users/<%=user._id%>/products/new">Add a Product</a>
+        <ul>
+            <% products.forEach((product)=>{ %>
+                <li>
+                    <a href="/users/<%= user._id %>/products/<%= product._id %>">
+                        <%= product.name %>
+                            <%= product.description %>
+                </li>
+                <% }) %>
+        </ul>
+</body>
+
 </html>

@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+dotenv.config();
+
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const session = require("express-session");
@@ -11,15 +13,12 @@ const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 
 const authController = require("./controllers/auth.js");
-const productsController = require("./controllers/productController.js");
-const productRoutes = require("./routes/productRoutes"); 
+const productsController = require("./controllers/products.js");
 
-dotenv.config(); 
 
 const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors({ origin: "http://localhost:3000" })); 
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
@@ -31,7 +30,7 @@ app.use(
   })
 );
 app.use(passUserToView);
-app.use(morgan("dev")); 
+app.use(morgan("dev"));
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/skincareDB", {
@@ -42,9 +41,9 @@ mongoose
   .catch((err) => console.log("MongoDB connection error:", err));
 
 app.use("/auth", authController);
-app.use(isSignedIn); 
+app.use(isSignedIn);
 app.use("/users/:userId/products", productsController);
-app.use("/products", productRoutes); 
+
 
 app.get("/", (req, res) => {
   if (req.session.user) {
