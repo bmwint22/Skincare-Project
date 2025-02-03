@@ -12,7 +12,8 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
 
-        <h1>Edit <%= product.name %><%= product.description %>
+        <h1>Edit <%= product.name %>
+                <%= product.description %>
         </h1>
 
         <form action="/users/<%= user._id %>/products/<%= product._id %>?_method=PUT" method="POST">
@@ -42,6 +43,6 @@
             <input type="text" name="price" id="price" />
             <button type="submit">Update Product</button>
         </form>
-</body> 
+</body>
 
 </html>
