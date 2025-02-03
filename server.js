@@ -17,11 +17,16 @@ const productsController = require("./controllers/products.js");
 
 
 const port = process.env.PORT || 3000;
+const path = require('path');
+
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 app.use(methodOverride("_method"));
+app.use(morgan("dev"));
+
+app.use(express.json()); app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -30,7 +35,6 @@ app.use(
   })
 );
 app.use(passUserToView);
-app.use(morgan("dev"));
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/skincareDB", {
@@ -40,11 +44,6 @@ mongoose
   .then(() => console.log(`Connected to MongoDB: ${mongoose.connection.name}`))
   .catch((err) => console.log("MongoDB connection error:", err));
 
-app.use("/auth", authController);
-app.use(isSignedIn);
-app.use("/users/:userId/products", productsController);
-
-
 app.get("/", (req, res) => {
   if (req.session.user) {
     res.redirect(`/users/${req.session.user._id}/products`);
@@ -52,6 +51,11 @@ app.get("/", (req, res) => {
     res.render("index.ejs", { user: req.session.user });
   }
 });
+
+app.use("/auth", authController);
+app.use(isSignedIn);
+app.use("/users/:userId/products", productsController);
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
