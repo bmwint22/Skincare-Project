@@ -121,12 +121,6 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('https://media.istockphoto.com/id/1158142147/photo/portrait-of-african-woman-with-beautiful-face-with-perfect-skin-just-cleaned-from-impurities.jpg?s=612x612&w=0&k=20&c=h4lHBH0KLDpeZ1f0XzzoFp-NNL0r0OOZ4ntimroTzxE=');
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    width: 100vw;
-    color: white;
 }
 
 .all-products-header {
@@ -177,4 +171,35 @@ ul>a {
 ul>a:hover {
     background-color: #4b598e;
     color: white;
+}
+
+.new-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.new-body>form,
+.edit-body>form {
+    height: 70%;
+}
+
+textarea,
+select {
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+select {
+    margin-bottom: 10px;
+}
+
+.edit-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

@@ -10,26 +10,26 @@
 
 <body>
     <%- include('../partials/_navbar.ejs') %>
-        <h1>Add a New Product</h1>
+        <h1>Add To Your Collection</h1>
+        <div class="new-body">
+            <form action="/users/<%= user._id %>/products" method="POST"> <label for="name">Name:</label>
+                <input type="text" name="name" id="name" />
 
-        <form action="/users/<%= user._id %>/products" method="POST"> <label for="name">Name:</label>
-            <input type="text" name="name" id="name" />
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="" />
 
-            <label for="description">Description:</label>
-            <input type="text" name="description" id="" />
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="cleanser">Cleanser</option>
+                    <option value="moisturizer">Moisturizer</option>
+                    <option value="sunscreen">Sunscreen</option>
+                </select>
 
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-                <option value="cleanser">Cleanser</option>
-                <option value="moisturizer">Moisturizer</option>
-                <option value="sunscreen">Sunscreen</option>
-            </select>
-
-            <label for="price">Price:</label>
-            <input type="text" name="price" id="price" />
-            <button type="submit">Add Product</button>
-        </form>
-
+                <label for="price">Price:</label>
+                <input type="text" name="price" id="price" />
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
 </body>
 
 </html>

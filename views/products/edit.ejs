@@ -12,38 +12,39 @@
 
 <body>
     <%- include('../partials/_navbar.ejs') %>
+        <div class="edit-body">
+            <h1>Edit <%= product.name %>
+                    <%= product.description %>
+            </h1>
 
-        <h1>Edit <%= product.name %>
-                <%= product.description %>
-        </h1>
+            <form action="/users/<%= user._id %>/products/<%= product._id %>?_method=PUT" method="POST">
 
-        <form action="/users/<%= user._id %>/products/<%= product._id %>?_method=PUT" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value="<% product.name %>" />
 
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="<% product.name %>" />
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="" />
 
-            <label for="description">Description:</label>
-            <input type="text" name="description" id="" />
+                <select id="category" name="category">
+                    <option value="cleanser" <%=product.category==='cleanser' ? 'selected' : '' %>
+                        >
+                        Cleanser
+                    </option>
+                    <option value="moisturizer" <%=product.category==='moisturizer' ? 'selected' : '' %>
+                        >
+                        Moisturizer
+                    </option>
+                    <option value="sunscreen" <%=product.category==='sunscreen' ? 'selected' : '' %>
+                        >
+                        Sunscreen
+                    </option>
+                </select>
 
-            <select id="category" name="category">
-                <option value="cleanser" <%=product.category==='cleanser' ? 'selected' : '' %>
-                    >
-                    Cleanser
-                </option>
-                <option value="moisturizer" <%=product.category==='moisturizer' ? 'selected' : '' %>
-                    >
-                    Moisturizer
-                </option>
-                <option value="sunscreen" <%=product.category==='sunscreen' ? 'selected' : '' %>
-                    >
-                    Sunscreen
-                </option>
-            </select>
-
-            <label for="price">Price:</label>
-            <input type="text" name="price" id="price" />
-            <button type="submit">Update Product</button>
-        </form>
+                <label for="price">Price:</label>
+                <input type="text" name="price" id="price" />
+                <button type="submit">Update Product</button>
+            </form>
+        </div>
 </body>
 
 </html>
