@@ -8,8 +8,8 @@ The **Skincare App** is a simple and intuitive tool designed to help users maint
 This project was created to encourage better self-care habits and provide users with a structured way to keep their skin healthy.  
 
 ##  Getting Started  
- **Deployed App Link:**   
- **Planning Materials:**  https://trello.com/invite/b/6797a5d784c01cf39453a4dc/ATTI4bd83aba4b83de3f39dc8790d42590722FC857DA/project-planning-deliverable
+ **Deployed App Link:** https://skincare-collection-app-4355b8f909f6.herokuapp.com/   
+ **Planning Materials:** https://trello.com/invite/b/6797a5d784c01cf39453a4dc/ATTI4bd83aba4b83de3f39dc8790d42590722FC857DA/project-planning-deliverable
 
 ##  Technologies Used  
 - **Frontend:** HTML, CSS, JavaScript  
